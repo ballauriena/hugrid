@@ -272,7 +272,8 @@
 						this.$href = $( '<a href="#" target="_blank">{{ .Site.Params.buttontext }}</a>' );
 						this.$details = $( '<div class="og-details"></div>' ).append( this.$title, this.$description, this.$href );
 						this.$loading = $( '<div class="og-loading"></div>' );
-						this.$fullimage = $( '<div class="og-fullimg"></div>' ).append( this.$loading );
+						this.$bgimage = $( `<div class="bg-image"></div>` )
+						this.$fullimage = $( '<div class="og-fullimg"></div>' ).append( this.$loading, this.$bgimage );
 						this.$closePreview = $( '<span class="og-close"></span>' );
 						this.$previewInner = $( '<div class="og-expander-inner"></div>' ).append( this.$closePreview, this.$fullimage, this.$details );
 						this.$previewEl = $( '<div class="og-expander"></div>' ).append( this.$previewInner );
@@ -330,9 +331,9 @@
 								var $img = $( this );
 								if( $img.attr( 'src' ) === self.$item.children('a').data( 'largesrc' ) ) {
 									self.$loading.hide();
-									self.$fullimage.find( 'img' ).remove();
-									self.$largeImg = $img.fadeIn( 350 );
-									self.$fullimage.append( self.$largeImg );
+									self.$bgimage.hide();
+									self.$bgimage.css('background-image', `url(${eldata.largesrc})`);
+									self.$bgimage.fadeIn( 350 );
 								}
 							} ).attr( 'src', eldata.largesrc );	
 						}
